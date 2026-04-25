@@ -8,7 +8,7 @@
 
 /* ── Base reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body { background-color: #FFF5F2; color: #5C2E1A; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
 /* ═══════════════════════════════
@@ -310,7 +310,8 @@ section { position: relative; overflow: hidden; }
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.15em;
+  justify-content: center;
+  gap: 1.5rem;
   margin-bottom: 3rem;
   padding-top: 2rem;
 }
@@ -342,9 +343,18 @@ section { position: relative; overflow: hidden; }
   line-height: 1.1;
   display: block;
 }
-@media (max-width: 480px) {
-  .razones-header { gap: 0.05em; }
-  .razones-number  { font-size: clamp(6rem, 20vw, 9rem); }
+@media (max-width: 768px) {
+  .razones-header {
+    flex-direction: row;
+    gap: 0.8rem;
+  }
+  .razones-title-group {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .razones-number {
+    font-size: clamp(6rem, 20vw, 9rem);
+  }
 }
 
 /* ── Skills ── */
@@ -643,6 +653,12 @@ section { position: relative; overflow: hidden; }
 .rose-lg  { width: 160px; height: 160px; }
 .rose-xl  { width: 210px; height: 210px; }
 .rose-deco img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+/* ── Mobile & Tablet fixes ── */
+@media (max-width: 768px) {
+  /* Hide roses on mobile/tablet to prevent them from taking over the screen */
+  .rose-deco { display: none !important; }
+}
 
 /* ── Mobile experience grid fix ── */
 @media (max-width: 640px) {
