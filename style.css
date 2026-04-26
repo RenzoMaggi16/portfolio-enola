@@ -236,7 +236,12 @@ body { background-color: #FFF5F2; color: #5C2E1A; font-family: 'Montserrat', san
 }
 
 /* ── Section shared ── */
-section { position: relative; overflow: hidden; }
+section {
+  --rose-progress: 0;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
 
 /* ── SOBRE MÍ ── */
 #sobre-mi { background: #FFF5F2; padding: 6rem 2rem 5rem; }
@@ -614,7 +619,7 @@ section { position: relative; overflow: hidden; }
 }
 
 /* Rose decorations sit above canvas but below content */
-#contacto .rose-deco { z-index: 1; }
+#contacto .rose-garden { z-index: 1; }
 /* Footer CTA — keep on one line */
 .footer-cta {
   font-family: 'Gilda Display', serif;
@@ -641,31 +646,120 @@ section { position: relative; overflow: hidden; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ═════════════════════════════
-   Growing Rose Animation (PNG)
+   Growing Rose Garden
 ═════════════════════════════ */
-.rose-deco {
+.rose-garden {
   position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.rose-deco {
+  --rose-enter: calc(0.2 + (var(--rose-progress) * 0.8));
+  --rose-scale: calc((0.58 + (var(--rose-progress) * 0.82)) * var(--rose-depth, 1));
+  position: absolute;
+  width: var(--rose-size, 160px);
+  height: var(--rose-size, 160px);
   pointer-events: none;
   user-select: none;
   opacity: 0;
-  transform: scale(0) rotate(-12deg);
-  transition: opacity 900ms ease-out, transform 900ms ease-out;
-  z-index: 0;
+  will-change: transform, opacity;
+  transition:
+    opacity 700ms ease,
+    transform 900ms cubic-bezier(.22, 1, .36, 1);
 }
 .rose-deco.bloomed {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
+  opacity: calc(0.24 + (var(--rose-enter) * 0.76));
 }
-.rose-sm  { width: 80px;  height: 80px;  }
-.rose-md  { width: 120px; height: 120px; }
-.rose-lg  { width: 160px; height: 160px; }
-.rose-xl  { width: 210px; height: 210px; }
-.rose-deco img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.rose-deco .rose-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: roseSway 8s ease-in-out infinite;
+  animation-delay: var(--rose-delay, 0s);
+  overflow: visible;
+}
+.rose-deco.is-top-left {
+  top: calc(var(--rose-distance, 24px) * -0.68);
+  left: calc(var(--rose-cross, 12px) * -0.7);
+  transform-origin: top left;
+  transform:
+    translate(-12%, -14%)
+    rotate(var(--rose-rotation))
+    scale(var(--rose-scale));
+}
+.rose-deco.is-top-right {
+  top: calc(var(--rose-cross, 12px) * -0.7);
+  right: calc(var(--rose-distance, 24px) * -0.68);
+  transform-origin: top right;
+  transform:
+    translate(12%, -14%)
+    rotate(var(--rose-rotation))
+    scale(var(--rose-scale));
+}
+.rose-deco.is-bottom-left {
+  bottom: calc(var(--rose-cross, 12px) * -0.7);
+  left: calc(var(--rose-distance, 24px) * -0.68);
+  transform-origin: bottom left;
+  transform:
+    translate(-12%, 14%)
+    rotate(var(--rose-rotation))
+    scale(var(--rose-scale));
+}
+.rose-deco.is-bottom-right {
+  right: calc(var(--rose-cross, 12px) * -0.7);
+  bottom: calc(var(--rose-distance, 24px) * -0.68);
+  transform-origin: bottom right;
+  transform:
+    translate(12%, 14%)
+    rotate(var(--rose-rotation))
+    scale(var(--rose-scale));
+}
 
-/* ── Mobile & Tablet fixes ── */
+@keyframes roseSway {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate3d(var(--rose-drift, 0px), calc(var(--rose-drift, 0px) * -0.7), 0) rotate(3deg) scale(1.035); }
+}
+
 @media (max-width: 768px) {
-  /* Hide roses on mobile/tablet to prevent them from taking over the screen */
-  .rose-deco { display: none !important; }
+  .rose-deco {
+    width: calc(var(--rose-size, 160px) * max(var(--rose-mobile-scale, 0.68), 0.78));
+    height: calc(var(--rose-size, 160px) * max(var(--rose-mobile-scale, 0.68), 0.78));
+  }
+  .rose-deco.is-top-left {
+    top: calc(var(--rose-distance, 24px) * -0.38);
+    left: calc(var(--rose-cross, 12px) * -0.4);
+    transform: translate(-4%, -6%) rotate(var(--rose-rotation)) scale(var(--rose-scale));
+  }
+  .rose-deco.is-top-right {
+    top: calc(var(--rose-cross, 12px) * -0.4);
+    right: calc(var(--rose-distance, 24px) * -0.38);
+    transform: translate(4%, -6%) rotate(var(--rose-rotation)) scale(var(--rose-scale));
+  }
+  .rose-deco.is-bottom-left {
+    bottom: calc(var(--rose-cross, 12px) * -0.4);
+    left: calc(var(--rose-distance, 24px) * -0.38);
+    transform: translate(-4%, 6%) rotate(var(--rose-rotation)) scale(var(--rose-scale));
+  }
+  .rose-deco.is-bottom-right {
+    right: calc(var(--rose-cross, 12px) * -0.4);
+    bottom: calc(var(--rose-distance, 24px) * -0.38);
+    transform: translate(4%, 6%) rotate(var(--rose-rotation)) scale(var(--rose-scale));
+  }
+}
+
+@media (max-width: 480px) {
+  .rose-deco {
+    --rose-scale: calc((0.62 + (var(--rose-progress) * 0.54)) * var(--rose-depth, 1) * 0.88);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rose-deco,
+  .rose-deco .rose-art {
+    transition: none;
+    animation: none;
+  }
 }
 
 /* ── Mobile experience grid fix ── */
@@ -901,4 +995,3 @@ section { position: relative; overflow: hidden; }
   /* Bug 4-B: skills section must be visible, not clipped */
   #skills { overflow: visible; position: relative; z-index: 5; }
 }
-

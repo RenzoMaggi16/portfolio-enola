@@ -100,17 +100,9 @@
   <!-- ════════════════════════════════
        SOBRE MÍ
   ════════════════════════════════ -->
-  <section id="sobre-mi" class="relative">
+  <section id="sobre-mi" class="relative" data-rose-garden="about">
     <!-- pink glow -->
     <div class="pink-glow" style="width:420px;height:420px;background:radial-gradient(circle,rgba(249,192,208,.55) 0%,transparent 70%);top:50%;left:40%;transform:translate(-50%,-50%);"></div>
-
-    <!-- Rose decorations (PNG) -->
-    <div class="rose-deco rose-lg" style="top:-35px;right:-35px;z-index:2;transform-origin: top right;" aria-hidden="true">
-      <img src="./assets/images/rose1.png" alt="" />
-    </div>
-    <div class="rose-deco rose-xl" style="bottom:-45px;left:-45px;transition-delay:200ms;z-index:2;transform-origin: bottom left;" aria-hidden="true">
-      <img src="./assets/images/rose2.png" alt="" />
-    </div>
 
     <div class="max-w-6xl mx-auto px-4 relative z-10">
 
@@ -178,15 +170,7 @@
   <!-- ════════════════════════════════
        3 RAZONES
   ════════════════════════════════ -->
-  <section id="razones">
-
-    <!-- Rose decorations for Razones (Added to balance sections) -->
-    <div class="rose-deco rose-lg" style="top:-35px;right:-35px;transition-delay:100ms;transform-origin: top right;" aria-hidden="true">
-      <img src="./assets/images/rose3.png" alt="" />
-    </div>
-    <div class="rose-deco rose-xl" style="bottom:-45px;left:-45px;transition-delay:300ms;transform-origin: bottom left;" aria-hidden="true">
-      <img src="./assets/images/rose1.png" alt="" />
-    </div>
+  <section id="razones" data-rose-garden="reasons">
 
     <!-- Hidden background element with semantic meaning... -->
     <div class="razones-big-3" aria-hidden="true">3</div>
@@ -236,17 +220,9 @@
   <!-- ════════════════════════════════
        PERSONAL SKILLS
   ════════════════════════════════ -->
-  <section id="skills">
+  <section id="skills" data-rose-garden="skills">
     <!-- Diamond glow -->
     <div class="diamond-glow" aria-hidden="true"></div>
-
-    <!-- Rose corner decoration (PNG) -->
-    <div class="rose-deco rose-md" style="top:-25px;left:-25px;transition-delay:100ms;transform-origin: top left;" aria-hidden="true">
-      <img src="./assets/images/rose3.png" alt="" />
-    </div>
-    <div class="rose-deco rose-xl" style="bottom:-45px;right:-45px;transition-delay:150ms;transform-origin: bottom right;" aria-hidden="true">
-      <img src="./assets/images/rose2.png" alt="" />
-    </div>
 
     <div class="max-w-5xl mx-auto px-4" style="position:relative;z-index:1;">
 
@@ -276,17 +252,9 @@
   <!-- ════════════════════════════════
        SOFTWARE
   ════════════════════════════════ -->
-  <section id="software">
+  <section id="software" data-rose-garden="software">
     <!-- glow blobs -->
     <div class="pink-glow" style="width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.3) 0%,transparent 70%);top:-80px;left:-80px;"></div>
-
-    <!-- Rose corner decorations -->
-    <div class="rose-deco rose-md" style="top:-25px;right:-25px;transition-delay:200ms;transform-origin: top right;" aria-hidden="true">
-      <img src="./assets/images/rose3.png" alt="" />
-    </div>
-    <div class="rose-deco rose-lg" style="bottom:-35px;left:-35px;transition-delay:300ms;transform-origin: bottom left;" aria-hidden="true">
-      <img src="./assets/images/rose1.png" alt="" style="opacity:0.6;" />
-    </div>
 
     <div class="max-w-5xl mx-auto px-4" style="position:relative;z-index:1;">
 
@@ -328,20 +296,7 @@
   <!-- ════════════════════════════════
        EXPERIENCIA
   ════════════════════════════════ -->
-  <section id="experiencia">
-
-    <!-- Rose near experience title (PNG) -->
-    <div class="rose-deco rose-lg" style="top:-35px;right:-35px;transition-delay:100ms;transform-origin: top right;" aria-hidden="true">
-      <img src="./assets/images/rose1.png" alt="" />
-    </div>
-    <div class="rose-deco rose-xl" style="bottom:-45px;left:-45px;transition-delay:250ms;transform-origin: bottom left;" aria-hidden="true">
-      <img src="./assets/images/rose3.png" alt="" />
-    </div>
-    
-    <!-- Experience section roses -->
-    <div class="rose-deco rose-sm" style="top:20px;left:5%;z-index:2;" aria-hidden="true">
-      <img src="./assets/images/rose2.png" alt="" />
-    </div>
+  <section id="experiencia" data-rose-garden="experience">
 
     <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
 
@@ -491,17 +446,9 @@
   <!-- ════════════════════════════════
        CONTACTO / FOOTER
   ════════════════════════════════ -->
-  <section id="contacto">
+  <section id="contacto" data-rose-garden="contact">
     <!-- Animated mesh gradient canvas (replaces glow blobs) -->
     <canvas id="contact-bg-canvas"></canvas>
-
-    <!-- Rose decorations (PNG) — sit above canvas -->
-    <div class="rose-deco rose-lg" style="top:-35px;left:-35px;transition-delay:150ms;transform-origin: top left;" aria-hidden="true">
-      <img src="./assets/images/rose1.png" alt="" />
-    </div>
-    <div class="rose-deco rose-xl" style="bottom:-45px;right:-45px;transition-delay:200ms;transform-origin: bottom right;" aria-hidden="true">
-      <img src="./assets/images/rose2.png" alt="" />
-    </div>
 
     <!-- Content wrapper — full-height centered flex column -->
     <div class="contacto-content">
@@ -575,6 +522,257 @@
     // Close on Escape
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
+    const roseSections = document.querySelectorAll('section[data-rose-garden]');
+    const roseCorners = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+
+    function seededValue(seed) {
+      let hash = 1779033703 ^ seed.length;
+      for (let i = 0; i < seed.length; i += 1) {
+        hash = Math.imul(hash ^ seed.charCodeAt(i), 3432918353);
+        hash = (hash << 13) | (hash >>> 19);
+      }
+      return () => {
+        hash = Math.imul(hash ^ (hash >>> 16), 2246822507);
+        hash = Math.imul(hash ^ (hash >>> 13), 3266489909);
+        hash ^= hash >>> 16;
+        return (hash >>> 0) / 4294967295;
+      };
+    }
+
+    function createRoseSvg(key, rand) {
+      const ns = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      const uid = key.replace(/[^a-z0-9_-]/gi, '').toLowerCase();
+      const hueShift = Math.round(-6 + rand() * 12);
+      const variant = Math.floor(rand() * 4);
+      const blossomTilt = (-14 + rand() * 28).toFixed(2);
+      const petalFill = `hsl(${336 + hueShift} 88% 82%)`;
+      const petalShade = `hsl(${344 + hueShift} 64% 66%)`;
+      const petalDeep = `hsl(${350 + hueShift} 58% 55%)`;
+      const stamen = `hsl(${355 + hueShift} 44% 50%)`;
+      const blush = `hsl(${330 + hueShift} 94% 92%)`;
+      let body = '';
+
+      svg.setAttribute('viewBox', '0 0 280 280');
+      svg.setAttribute('class', 'rose-art');
+      svg.setAttribute('aria-hidden', 'true');
+
+      if (variant === 0) {
+        body = `
+          <g transform="translate(-18 4) rotate(${blossomTilt} 146 122)">
+            <g opacity=".96">
+              <ellipse cx="118" cy="102" rx="78" ry="46" fill="${petalFill}" transform="rotate(-34 118 102)" />
+              <ellipse cx="164" cy="80" rx="74" ry="42" fill="${blush}" transform="rotate(8 164 80)" />
+              <ellipse cx="179" cy="132" rx="72" ry="44" fill="${petalShade}" transform="rotate(42 179 132)" />
+              <ellipse cx="130" cy="156" rx="78" ry="46" fill="${petalFill}" transform="rotate(86 130 156)" />
+              <ellipse cx="82" cy="132" rx="72" ry="44" fill="${blush}" transform="rotate(146 82 132)" />
+              <ellipse cx="86" cy="82" rx="68" ry="40" fill="${petalShade}" transform="rotate(-94 86 82)" />
+              <ellipse cx="132" cy="116" rx="42" ry="32" fill="${petalDeep}" />
+              <g stroke="rgba(255,248,250,.88)" stroke-width="4" stroke-linecap="round">
+                <path d="M132 116 C119 95 103 76 82 62" />
+                <path d="M132 116 C127 90 127 69 131 47" />
+                <path d="M132 116 C143 92 158 73 177 57" />
+                <path d="M132 116 C151 111 171 111 195 116" />
+                <path d="M132 116 C145 128 156 146 164 167" />
+                <path d="M132 116 C129 137 126 157 118 179" />
+                <path d="M132 116 C113 123 95 134 78 151" />
+              </g>
+              <g fill="${stamen}">
+                <circle cx="81" cy="61" r="6" />
+                <circle cx="131" cy="47" r="6" />
+                <circle cx="177" cy="58" r="6" />
+                <circle cx="194" cy="117" r="6" />
+                <circle cx="164" cy="168" r="6" />
+                <circle cx="118" cy="179" r="6" />
+                <circle cx="78" cy="151" r="6" />
+              </g>
+            </g>
+            <g transform="translate(142 128) scale(.72) rotate(18)">
+              <ellipse cx="0" cy="-26" rx="28" ry="54" fill="${blush}" />
+              <ellipse cx="24" cy="-4" rx="28" ry="54" fill="${petalFill}" transform="rotate(62 24 -4)" />
+              <ellipse cx="10" cy="29" rx="28" ry="54" fill="${petalShade}" transform="rotate(118 10 29)" />
+              <ellipse cx="-24" cy="10" rx="28" ry="54" fill="${petalFill}" transform="rotate(192 -24 10)" />
+              <circle cx="0" cy="0" r="18" fill="${petalDeep}" />
+            </g>
+          </g>
+        `;
+      } else if (variant === 1) {
+        body = `
+          <g transform="translate(20 -10) rotate(${blossomTilt} 120 144)">
+            <g transform="translate(34 38) scale(.95)">
+              <path d="M67 114 C42 101 31 82 28 57 C53 58 74 68 89 90 C87 103 80 111 67 114 Z" fill="${blush}" />
+              <path d="M95 84 C88 52 95 28 118 10 C139 28 147 53 141 84 C127 90 110 90 95 84 Z" fill="${petalFill}" />
+              <path d="M146 91 C157 64 176 47 204 39 C207 68 200 91 180 109 C165 108 154 102 146 91 Z" fill="${petalShade}" />
+              <path d="M140 120 C168 117 191 124 209 144 C185 157 161 159 137 146 C132 136 132 128 140 120 Z" fill="${petalFill}" />
+              <path d="M93 122 C82 149 63 167 37 177 C33 151 40 128 58 110 C73 109 85 113 93 122 Z" fill="${petalShade}" />
+              <path d="M103 103 C124 90 145 92 164 108 C157 127 143 138 123 143 C108 134 101 121 103 103 Z" fill="${petalDeep}" />
+              <g stroke="rgba(255,247,249,.82)" stroke-width="4" stroke-linecap="round">
+                <path d="M125 114 C107 94 90 76 66 61" />
+                <path d="M125 114 C118 85 117 58 120 28" />
+                <path d="M125 114 C145 90 165 72 190 58" />
+                <path d="M125 114 C154 111 176 114 198 124" />
+                <path d="M125 114 C107 136 91 153 70 167" />
+              </g>
+              <g fill="${stamen}">
+                <circle cx="66" cy="60" r="6" />
+                <circle cx="120" cy="28" r="6" />
+                <circle cx="190" cy="58" r="6" />
+                <circle cx="198" cy="124" r="6" />
+                <circle cx="70" cy="167" r="6" />
+                <circle cx="125" cy="114" r="7" />
+              </g>
+            </g>
+            <g transform="translate(188 162) scale(.52) rotate(-26)">
+              <ellipse cx="0" cy="-26" rx="24" ry="48" fill="${petalFill}" />
+              <ellipse cx="22" cy="-4" rx="24" ry="48" fill="${blush}" transform="rotate(60 22 -4)" />
+              <ellipse cx="8" cy="26" rx="24" ry="48" fill="${petalShade}" transform="rotate(120 8 26)" />
+              <ellipse cx="-20" cy="10" rx="24" ry="48" fill="${petalFill}" transform="rotate(194 -20 10)" />
+              <circle cx="0" cy="0" r="14" fill="${petalDeep}" />
+            </g>
+          </g>
+        `;
+      } else if (variant === 2) {
+        body = `
+          <g transform="translate(-8 12) rotate(${blossomTilt} 138 136)">
+            <g transform="translate(34 18)">
+              <g transform="translate(0 0) scale(1.02)">
+                <ellipse cx="82" cy="76" rx="33" ry="70" fill="${petalFill}" transform="rotate(-46 82 76)" />
+                <ellipse cx="128" cy="58" rx="32" ry="69" fill="${blush}" transform="rotate(-8 128 58)" />
+                <ellipse cx="171" cy="80" rx="33" ry="70" fill="${petalShade}" transform="rotate(30 171 80)" />
+                <ellipse cx="178" cy="127" rx="33" ry="70" fill="${petalFill}" transform="rotate(78 178 127)" />
+                <ellipse cx="145" cy="164" rx="34" ry="72" fill="${blush}" transform="rotate(126 145 164)" />
+                <ellipse cx="96" cy="164" rx="33" ry="70" fill="${petalShade}" transform="rotate(178 96 164)" />
+                <ellipse cx="60" cy="128" rx="33" ry="70" fill="${petalFill}" transform="rotate(226 60 128)" />
+                <circle cx="120" cy="114" r="33" fill="${petalDeep}" />
+                <g stroke="rgba(255,247,249,.78)" stroke-width="3.5" stroke-linecap="round">
+                  <path d="M120 114 C102 90 91 69 82 45" />
+                  <path d="M120 114 C120 88 123 68 128 42" />
+                  <path d="M120 114 C139 92 156 76 175 66" />
+                  <path d="M120 114 C149 111 170 114 190 124" />
+                  <path d="M120 114 C140 132 149 150 151 175" />
+                  <path d="M120 114 C114 142 106 160 93 180" />
+                  <path d="M120 114 C96 124 76 139 60 158" />
+                </g>
+                <g fill="${stamen}">
+                  <circle cx="82" cy="44" r="5.5" />
+                  <circle cx="128" cy="42" r="5.5" />
+                  <circle cx="175" cy="66" r="5.5" />
+                  <circle cx="191" cy="124" r="5.5" />
+                  <circle cx="151" cy="176" r="5.5" />
+                  <circle cx="93" cy="180" r="5.5" />
+                  <circle cx="60" cy="158" r="5.5" />
+                </g>
+              </g>
+              <g transform="translate(156 152) scale(.46) rotate(22)">
+                <ellipse cx="0" cy="-22" rx="22" ry="42" fill="${petalFill}" />
+                <ellipse cx="20" cy="-4" rx="22" ry="42" fill="${blush}" transform="rotate(62 20 -4)" />
+                <ellipse cx="7" cy="22" rx="22" ry="42" fill="${petalShade}" transform="rotate(120 7 22)" />
+                <ellipse cx="-18" cy="8" rx="22" ry="42" fill="${petalFill}" transform="rotate(196 -18 8)" />
+                <circle cx="0" cy="0" r="12" fill="${petalDeep}" />
+              </g>
+            </g>
+          </g>
+        `;
+      } else {
+        body = `
+          <g transform="translate(6 -6) rotate(${blossomTilt} 138 128)">
+            <g transform="translate(18 14)">
+              <g transform="translate(12 12) scale(.82)">
+                <ellipse cx="92" cy="88" rx="62" ry="38" fill="${petalFill}" transform="rotate(-34 92 88)" />
+                <ellipse cx="134" cy="64" rx="58" ry="34" fill="${blush}" transform="rotate(2 134 64)" />
+                <ellipse cx="176" cy="84" rx="58" ry="34" fill="${petalShade}" transform="rotate(30 176 84)" />
+                <ellipse cx="185" cy="126" rx="60" ry="36" fill="${petalFill}" transform="rotate(76 185 126)" />
+                <ellipse cx="156" cy="162" rx="60" ry="36" fill="${blush}" transform="rotate(120 156 162)" />
+                <ellipse cx="111" cy="170" rx="62" ry="38" fill="${petalShade}" transform="rotate(168 111 170)" />
+                <ellipse cx="74" cy="140" rx="58" ry="34" fill="${petalFill}" transform="rotate(214 74 140)" />
+                <ellipse cx="65" cy="99" rx="58" ry="34" fill="${blush}" transform="rotate(258 65 99)" />
+                <circle cx="124" cy="116" r="28" fill="${petalDeep}" />
+                <g stroke="rgba(255,247,249,.82)" stroke-width="3.2" stroke-linecap="round">
+                  <path d="M124 116 C108 97 92 81 73 68" />
+                  <path d="M124 116 C119 90 121 68 129 46" />
+                  <path d="M124 116 C145 96 161 84 181 74" />
+                  <path d="M124 116 C153 114 174 118 194 129" />
+                  <path d="M124 116 C145 130 157 145 164 164" />
+                  <path d="M124 116 C115 140 108 156 96 174" />
+                  <path d="M124 116 C103 123 84 135 69 151" />
+                </g>
+                <g fill="${stamen}">
+                  <circle cx="73" cy="68" r="5.5" />
+                  <circle cx="129" cy="46" r="5.5" />
+                  <circle cx="181" cy="74" r="5.5" />
+                  <circle cx="194" cy="129" r="5.5" />
+                  <circle cx="164" cy="164" r="5.5" />
+                  <circle cx="96" cy="174" r="5.5" />
+                  <circle cx="69" cy="151" r="5.5" />
+                </g>
+              </g>
+              <g transform="translate(32 162) scale(.48) rotate(-18)">
+                <ellipse cx="0" cy="-22" rx="20" ry="40" fill="${petalFill}" />
+                <ellipse cx="18" cy="-3" rx="20" ry="40" fill="${blush}" transform="rotate(62 18 -3)" />
+                <ellipse cx="6" cy="21" rx="20" ry="40" fill="${petalShade}" transform="rotate(122 6 21)" />
+                <ellipse cx="-16" cy="8" rx="20" ry="40" fill="${petalFill}" transform="rotate(194 -16 8)" />
+                <circle cx="0" cy="0" r="11" fill="${petalDeep}" />
+              </g>
+            </g>
+          </g>
+        `;
+      }
+
+      svg.innerHTML = `
+        <defs>
+          <radialGradient id="wash-${uid}" cx="50%" cy="50%" r="62%">
+            <stop offset="0%" stop-color="hsla(${336 + hueShift} 100% 88% / .34)" />
+            <stop offset="100%" stop-color="hsla(${336 + hueShift} 100% 88% / 0)" />
+          </linearGradient>
+          <filter id="rose-shadow-${uid}" x="-40%" y="-40%" width="180%" height="180%">
+            <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="rgba(92,46,26,.14)" />
+          </filter>
+        </defs>
+        <g filter="url(#rose-shadow-${uid})">
+          <circle cx="142" cy="140" r="110" fill="url(#wash-${uid})" />
+          ${body}
+        </g>
+      `;
+
+      return svg;
+    }
+
+    function createRoseGarden(section) {
+      const rand = seededValue(section.id || section.dataset.roseGarden || 'rose-section');
+      const garden = document.createElement('div');
+      garden.className = 'rose-garden';
+      garden.setAttribute('aria-hidden', 'true');
+      const corners = [...roseCorners]
+        .sort(() => rand() - 0.5)
+        .slice(0, 2);
+
+      corners.forEach((corner, index) => {
+        const rose = document.createElement('div');
+        const size = 138 + Math.round(rand() * 108);
+        const distance = 34 + Math.round(rand() * 44);
+        const cross = 32 + Math.round(rand() * 38);
+        const rotation = Math.round(-24 + rand() * 48);
+        const drift = (rand() * 16 - 8).toFixed(1);
+        const delay = (index * 0.14 + rand() * 0.24).toFixed(2);
+
+        rose.className = `rose-deco is-${corner}`;
+        rose.style.setProperty('--rose-size', `${size}px`);
+        rose.style.setProperty('--rose-distance', `${distance}px`);
+        rose.style.setProperty('--rose-cross', `${cross}px`);
+        rose.style.setProperty('--rose-rotation', `${rotation}deg`);
+        rose.style.setProperty('--rose-delay', `${delay}s`);
+        rose.style.setProperty('--rose-drift', `${drift}px`);
+        rose.style.setProperty('--rose-depth', (0.78 + rand() * 0.4).toFixed(2));
+        rose.style.setProperty('--rose-mobile-scale', (0.58 + rand() * 0.16).toFixed(2));
+        rose.appendChild(createRoseSvg(`${section.id || 'section'}-${corner}-${index}`, rand));
+        garden.appendChild(rose);
+      });
+
+      section.insertBefore(garden, section.firstChild);
+    }
+
+    roseSections.forEach(createRoseGarden);
+
     /* ── Reveal on scroll ── */
     const revealEls = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
@@ -587,21 +785,47 @@
     }, { threshold: 0.12 });
     revealEls.forEach(el => revealObserver.observe(el));
 
-    /* ── Growing Rose Animation ─────────────────────────────
-       Each .rose-deco starts at scale(0) opacity(0) rotate(-12deg).
-       IntersectionObserver triggers .bloomed => scale(1) opacity(1) rotate(0).
-       Smooth ease-out transition is defined in CSS.
-    ── */
+    /* ── Growing Rose Animation tied to section scroll ── */
     const roseDecos = document.querySelectorAll('.rose-deco');
     const roseObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('bloomed');
-          roseObserver.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('bloomed');
         }
       });
-    }, { threshold: 0.05, rootMargin: '100px 100px -40px 100px' });
+    }, { threshold: 0.18, rootMargin: '-4% 0px -4% 0px' });
     roseDecos.forEach(rose => roseObserver.observe(rose));
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function updateRoseProgress() {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+      roseSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const start = viewportHeight * 0.92;
+        const end = -Math.max(rect.height * 0.24, viewportHeight * 0.2);
+        const progress = clamp((start - rect.top) / (start - end), 0, 1);
+        section.style.setProperty('--rose-progress', progress.toFixed(3));
+      });
+    }
+
+    let roseTicking = false;
+    function queueRoseProgress() {
+      if (roseTicking) return;
+      roseTicking = true;
+      requestAnimationFrame(() => {
+        updateRoseProgress();
+        roseTicking = false;
+      });
+    }
+
+    updateRoseProgress();
+    window.addEventListener('scroll', queueRoseProgress, { passive: true });
+    window.addEventListener('resize', queueRoseProgress, { passive: true });
 
     /* ── Signature Writing Animation for Hero Title ── */
     document.addEventListener('DOMContentLoaded', () => {
