@@ -334,6 +334,7 @@ section { position: relative; overflow: hidden; }
   font-size: clamp(2.2rem, 5.5vw, 4.5rem);
   color: #5C2E1A;
   line-height: 1;
+  text-transform: uppercase;
   display: block;
 }
 .razones-title-line2 {
@@ -474,20 +475,27 @@ section { position: relative; overflow: hidden; }
 
 /* Category title: "Videos" in Montserrat, rest in Gilda Display */
 .exp-category-title {
-  font-size: clamp(1.6rem, 4vw, 2.8rem);
-  color: #5C2E1A;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
   padding-left: 1rem;
-  line-height: 1.2;
 }
 .exp-cat-montserrat {
   font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   font-weight: 700;
-  font-style: normal;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #ff6a9e;
+  margin-bottom: .2rem;
+  display: block;
 }
 .exp-cat-gilda {
   font-family: 'Gilda Display', serif;
-  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: .04em;
+  color: #5C2E1A;
+  text-transform: uppercase;
+  display: block;
 }
 
 .video-card {
